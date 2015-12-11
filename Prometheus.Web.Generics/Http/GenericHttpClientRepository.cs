@@ -38,29 +38,36 @@ namespace Prometheus.Web.Generics.Http
         /// method from say GET to DELETE</param>
         /// <param name="apiUrl">The portion of the url we use to call the web Rest method</param>
         /// <param name="content">The object we are taling action on. Used for posts and puts</param>
-        private void SetupHttpClient(HttpClient client, string restMethod, string apiUrl)
+        private void SetupHttpClient(HttpClient client)
         {
             client.BaseAddress = new Uri(_baseAddress);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            if(!string.IsNullOrWhiteSpace(_token))
+            if (!string.IsNullOrWhiteSpace(_token))
             {
                 client.DefaultRequestHeaders.Add("Authorization:", string.Format("Bearer {0}", _token).ToString());
-            }                      
+            }
         }
-        public Task<bool> DeleteAsync(string apiUrl)
+        public async Task<bool> DeleteAsync(string apiUrl)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                SetupHttpClient(client);
+
+                var response = await client.DeleteAsync(apiUrl).ConfigureAwait(false);
+
+                return response.IsSuccessStatusCode;
+            }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(string apiUrl)
+        public async Task<IEnumerable<T>> GetMultipleItemsAsync(string apiUrl)
         {
             IEnumerable<T> result = null;
 
             using (var client = new HttpClient())
             {
-                SetupHttpClient(client, "Get", apiUrl);
+                SetupHttpClient(client);
 
                 var response = await client.GetAsync(apiUrl).ConfigureAwait(false);
 
@@ -78,14 +85,54 @@ namespace Prometheus.Web.Generics.Http
             return result;
         }
 
-        public Task<T> GetByIdAsync(string apiUrl)
+        public async Task<T> GetBySingleItemAsync(string apiUrl)
         {
-            throw new NotImplementedException();
+            T result = null;
+
+            using (var client = new HttpClient())
+            {
+                SetupHttpClient(client);
+
+                var response = await client.GetAsync(apiUrl).ConfigureAwait(false);
+
+                response.EnsureSuccessStatusCode();
+
+                await response.Content.ReadAsStringAsync().ContinueWith((Task<string> x) =>
+                {
+                    if (x.IsFaulted)
+                        throw x.Exception;
+
+                    result = JsonConvert.DeserializeObject<T>(x.Result);
+                });
+            }
+
+            return result;
         }
 
-        public Task<T> InsertAsync(string apiUrl, T entity)
+        public async Task<T> PostAsync(string apiUrl, T entity)
         {
-            throw new NotImplementedException();
+            T result = null;
+
+            using (var client = new HttpClient())
+            {
+                SetupHttpClient(client);
+
+                var jsonIn = JsonConvert.SerializeObject(entity);
+                HttpContent objectContent = new StringContent(jsonIn, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(apiUrl, objectContent);
+
+                response.EnsureSuccessStatusCode();
+
+                await response.Content.ReadAsStringAsync().ContinueWith((Task<string> x) =>
+                {
+                    if (x.IsFaulted)
+                        throw x.Exception;
+
+                    result = JsonConvert.DeserializeObject<T>(x.Result);
+                });
+            }
+
+            return result;
         }
 
         public Task<IQueryable<T[]>> SearchForAsync(Expression<Func<T, bool>> predicate)
@@ -93,9 +140,18 @@ namespace Prometheus.Web.Generics.Http
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(string apiUrl, T entity)
+        public async Task<bool> PutAsync(string apiUrl, T entity)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                SetupHttpClient(client);
+
+                var jsonIn = JsonConvert.SerializeObject(entity);
+                HttpContent objectContent = new StringContent(jsonIn, Encoding.UTF8, "application/json");
+                var response = await client.PutAsync(apiUrl, objectContent);
+
+                return response.IsSuccessStatusCode;
+            }
         }
     }
 }
