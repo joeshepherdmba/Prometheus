@@ -61,9 +61,9 @@ namespace Prometheus.Web.Generics.Http
             }
         }
 
-        public async Task<IEnumerable<T>> GetMultipleItemsAsync(string apiUrl)
+        public async Task<IQueryable<T>> GetMultipleItemsAsync(string apiUrl)
         {
-            IEnumerable<T> result = null;
+            IQueryable<T> result = null;
 
             using (var client = new HttpClient())
             {
@@ -78,7 +78,7 @@ namespace Prometheus.Web.Generics.Http
                     if (x.IsFaulted)
                         throw x.Exception;
 
-                    result = JsonConvert.DeserializeObject<IEnumerable<T>>(x.Result);
+                    result = JsonConvert.DeserializeObject<IQueryable<T>>(x.Result);
                 });
             }
 
@@ -133,11 +133,6 @@ namespace Prometheus.Web.Generics.Http
             }
 
             return result;
-        }
-
-        public Task<IQueryable<T[]>> SearchForAsync(Expression<Func<T, bool>> predicate)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<bool> PutAsync(string apiUrl, T entity)
