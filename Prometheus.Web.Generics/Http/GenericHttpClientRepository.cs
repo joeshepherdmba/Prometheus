@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prometheus.Web.Generics.Http
+namespace Prometheus.Web.Generics
 {
     public class GenericHttpClientRepository<T> : IGenericHttpClientRepository<T> where T : class
     {

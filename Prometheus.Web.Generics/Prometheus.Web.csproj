@@ -7,8 +7,8 @@
     <ProjectGuid>{31A470F7-6988-4440-9244-86F3F041BAB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Prometheus.Web.Generics</RootNamespace>
-    <AssemblyName>Prometheus.Web.Generics</AssemblyName>
+    <RootNamespace>Prometheus.Web</RootNamespace>
+    <AssemblyName>Prometheus.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

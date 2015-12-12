@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prometheus.Web.Generics.Http
+namespace Prometheus.Web.Generics
 {
     public interface IGenericHttpClientRepository<T>
     {
