@@ -42,7 +42,7 @@ namespace Prometheus.Web.Generics
 
             if (!string.IsNullOrWhiteSpace(_token))
             {
-                client.DefaultRequestHeaders.Add("Authorization:", string.Format("Bearer {0}", _token).ToString());
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token); //.Add("Authorization:", string.Format("Bearer {0}", _token).ToString());
             }
         }
 
