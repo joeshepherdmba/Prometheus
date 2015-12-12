@@ -11,7 +11,7 @@ namespace Prometheus.Web.Generics.Http
     {
         Task<T> PostAsync(string apiUrl, T entity);
         Task<bool> DeleteAsync(string apiUrl);
-        Task<IQueryable<T>> GetMultipleItemsAsync(string apiUrl);
+        Task<List<T>> GetMultipleItemsAsync(string apiUrl);
         Task<T> GetBySingleItemAsync(string apiUrl);
         Task<bool> PutAsync(string apiUrl, T entity);
     }
