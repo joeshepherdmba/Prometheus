@@ -34,10 +34,6 @@ namespace Prometheus.Web.Generics
         /// Used to setup the base address, accept headers (application/json), and authentication headers for the request
         /// </summary>
         /// <param name="client">The HttpClient being configured</param>
-        /// <param name="restMethod">GET, POST, PUT or DELETE. Aim to prevent hacker changing the 
-        /// method from say GET to DELETE</param>
-        /// <param name="apiUrl">The portion of the url we use to call the web Rest method</param>
-        /// <param name="content">The object we are taling action on. Used for posts and puts</param>
         private void SetupHttpClient(HttpClient client)
         {
             client.BaseAddress = new Uri(_baseAddress);
@@ -49,14 +45,18 @@ namespace Prometheus.Web.Generics
                 client.DefaultRequestHeaders.Add("Authorization:", string.Format("Bearer {0}", _token).ToString());
             }
         }
+
+        /// <summary>
+        /// Deletes the specified object. 
+        /// </summary>
+        /// <param name="apiUrl">Example: objectToDelete/1</param>
+        /// <returns>bool</returns>
         public async Task<bool> DeleteAsync(string apiUrl)
         {
             using (var client = new HttpClient())
             {
                 SetupHttpClient(client);
-
                 var response = await client.DeleteAsync(apiUrl).ConfigureAwait(false);
-
                 return response.IsSuccessStatusCode;
             }
         }
