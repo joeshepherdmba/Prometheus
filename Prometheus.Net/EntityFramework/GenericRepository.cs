@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prometheus.Net.EntityFramework
+namespace Prometheus.Net.Generics
 {
     public class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : class
     {
