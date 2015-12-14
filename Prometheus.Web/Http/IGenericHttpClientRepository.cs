@@ -14,5 +14,6 @@ namespace Prometheus.Web.Generics
         Task<List<T>> GetMultipleItemsAsync(string apiUrl);
         Task<T> GetBySingleItemAsync(string apiUrl);
         Task<bool> PutAsync(string apiUrl, T entity);
+        Task<T> RefreshToken(string apiUrl, string bodyContent);
     }
 }

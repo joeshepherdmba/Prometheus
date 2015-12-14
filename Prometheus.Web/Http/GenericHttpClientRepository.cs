@@ -154,5 +154,30 @@ namespace Prometheus.Web.Generics
                 return response.IsSuccessStatusCode;
             }
         }
+
+        public async Task<T> RefreshToken(string apiUrl, string bodyContent)
+        {
+            T result = null;
+
+            using (var client = new HttpClient())
+            {
+                SetupHttpClient(client);
+
+                HttpContent objectContent = new StringContent(bodyContent, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(apiUrl, objectContent);
+
+                response.EnsureSuccessStatusCode();
+
+                await response.Content.ReadAsStringAsync().ContinueWith((Task<string> x) =>
+                {
+                    if (x.IsFaulted)
+                        throw x.Exception;
+
+                    result = JsonConvert.DeserializeObject<T>(x.Result);
+                });
+
+                return result;
+            }
+        }
     }
 }
