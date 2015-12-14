@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prometheus.Net", "Prometheu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prometheus.Web", "Prometheus.Web\Prometheus.Web.csproj", "{31A470F7-6988-4440-9244-86F3F041BAB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prometheus.CiscoSpark.Model", "Prometheus.CiscoSpark.Model\Prometheus.CiscoSpark.Model.csproj", "{46EC2F72-4E77-4E12-822A-71988EDE5735}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{31A470F7-6988-4440-9244-86F3F041BAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31A470F7-6988-4440-9244-86F3F041BAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31A470F7-6988-4440-9244-86F3F041BAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EC2F72-4E77-4E12-822A-71988EDE5735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EC2F72-4E77-4E12-822A-71988EDE5735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EC2F72-4E77-4E12-822A-71988EDE5735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EC2F72-4E77-4E12-822A-71988EDE5735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
