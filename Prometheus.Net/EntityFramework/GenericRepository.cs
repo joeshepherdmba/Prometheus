@@ -60,5 +60,21 @@ namespace Prometheus.Net.Generics
         {
             context.Dispose();
         }
+
+        public async Task<T> GetByIdAsync(object id)
+        {
+            return await DbSet.FindAsync(id);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+            await this.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await context.SaveChangesAsync();
+        }
     }
 }

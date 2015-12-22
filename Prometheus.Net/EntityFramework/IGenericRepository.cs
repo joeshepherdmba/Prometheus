@@ -20,5 +20,9 @@ namespace Prometheus.Net.Generics
         T GetById(object id);
         void Update(T entity);
         void SaveChanges();
+
+        Task<T> GetByIdAsync(object id);
+        Task UpdateAsync(T entity);
+        Task SaveChangesAsync();
     }
 }
