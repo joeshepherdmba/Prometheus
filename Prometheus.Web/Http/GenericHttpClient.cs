@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Prometheus.Web.Generics
 {
-    public class GenericHttpClientRepository<T> : IGenericHttpClientRepository<T> where T : class
+    public class GenericHttpClient<T> : IGenericHttpClient<T> where T : class
     {
         #region "Private Members"
         private readonly string _baseAddress;
@@ -18,11 +18,11 @@ namespace Prometheus.Web.Generics
         #endregion
 
         #region "Constructors"
-        public GenericHttpClientRepository(string baseAddress)
+        public GenericHttpClient(string baseAddress)
         {
             _baseAddress = baseAddress;
         }
-        public GenericHttpClientRepository(string baseAddress, string token)
+        public GenericHttpClient(string baseAddress, string token)
         {
             _baseAddress = baseAddress;
             _token = token;
@@ -91,7 +91,7 @@ namespace Prometheus.Web.Generics
             return result;
         }
 
-        public async Task<T> GetBySingleItemAsync(string apiUrl)
+        public async Task<T> GetSingleItemAsync(string apiUrl)
         {
             T result = null;
 

@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\GenericHttpClientRepository.cs" />
-    <Compile Include="Http\IGenericHttpClientRepository.cs" />
+    <Compile Include="Http\GenericHttpClient.cs" />
+    <Compile Include="Http\IGenericHttpClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

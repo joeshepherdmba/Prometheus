@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Prometheus.Web.Generics
 {
-    public interface IGenericHttpClientRepository<T>
+    public interface IGenericHttpClient<T>
     {
         Task<T> PostAsync(string apiUrl, T entity);
         Task<bool> DeleteAsync(string apiUrl);
         Task<List<T>> GetMultipleItemsAsync(string apiUrl);
-        Task<T> GetBySingleItemAsync(string apiUrl);
+        Task<T> GetSingleItemAsync(string apiUrl);
         Task<bool> PutAsync(string apiUrl, T entity);
         Task<T> RefreshToken(string apiUrl, string bodyContent);
     }
