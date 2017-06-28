@@ -49,9 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityFramework\GenericRepository.cs" />
-    <Compile Include="EntityFramework\IGenericRepository.cs" />
+    <Compile Include="Generics\GenericRepository.cs" />
+    <Compile Include="Generics\IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Prometheus.Net.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
