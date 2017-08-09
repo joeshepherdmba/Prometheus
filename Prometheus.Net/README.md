@@ -14,12 +14,10 @@ using Prometheus.Net.Generics;
 
 namespace test
 {
-    public class MyRepository<T>: GenericRepository<T> where T : class
+    public class UserRepository: GenericRepository<User>
     {
-		public MyRepository(DbContext dataContext)
-        :base(dataContext)
-		{
-			
-		}
+        public UserRepository(DbContext context)
+            :base(context){
+        }
     }
 }
